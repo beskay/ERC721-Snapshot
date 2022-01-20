@@ -33,7 +33,7 @@ const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
 // iterate over all token Ids and store owner. If owner already exists, increase counter
 export default async function getSnapshot() {
   let holders = {};
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < SUPPLY; i++) {
     let tmp = await contract.ownerOf(i);
     if (holders[tmp]) {
       holders[tmp] += 1;
