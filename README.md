@@ -30,7 +30,7 @@ Go to your Supabase dashboard and click on Settings in the sidebar navigation. H
 
 Supply is the circulating supply of NFTs, e.g. 10000 for BAYC.
 
-You dont have to use Alchemy obviously, you can also use Infura or your own node etc.
+You dont have to use Alchemy as your provider obviously, you can also use Infura or your own node etc.
 
 ### Supabase
 
@@ -51,12 +51,13 @@ Run
 node db.js
 ```
 
-And thats literally it. All tokenholders with their corresponding tokenbalance will appear in your Supabase database. You will the sent data in your terminal, e.g.
+And thats literally it. All tokenholders with their corresponding tokenbalance will appear in your Supabase database. You will see the sent data in your terminal, e.g.
 
 ```
 Data sent: [
   { address: '0xabcdefg123456', balance: 1 }
 ]
+...
 ```
 
 If you dont want to save the data via Supabase, just run
@@ -65,7 +66,11 @@ If you dont want to save the data via Supabase, just run
 node snapshot.js
 ```
 
-Make sure to edit the script and save the data somewhere else in that case.
+Make sure to edit the script and save the data somewhere else in that case, or just display it in your terminal with
+
+```
+console.log(holders)
+```
 
 ## Useful resources
 
@@ -74,3 +79,6 @@ https://supabase.com/docs/
 
 Ethers js docs
 https://docs.ethers.io/v5/
+
+OpenZeppeling ERC721
+https://docs.openzeppelin.com/contracts/4.x/api/token/erc721

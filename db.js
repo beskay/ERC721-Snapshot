@@ -6,6 +6,7 @@ const { SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_TABLENAME } = process.env;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// function to send data to supabase
 async function sendData(key, value) {
   const { data, error } = await supabase
     .from(SUPABASE_TABLENAME)
