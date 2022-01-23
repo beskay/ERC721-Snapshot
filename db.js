@@ -1,10 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
-import getSnapshot from "./snapshot.js";
+const supa = require("@supabase/supabase-js");
+const snapshot = require("./snapshot");
+const tree = require("./merkleTree");
 
-import "dotenv/config";
+require("dotenv").config();
 const { SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_TABLENAME } = process.env;
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = supa.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // function to send data to supabase
 async function sendData(key, value) {
@@ -16,10 +17,14 @@ async function sendData(key, value) {
 }
 
 async function main() {
-  const holders = await getSnapshot();
-  for (const [key, value] of Object.entries(holders)) {
+  const holders = await snapshot.getSnapshot();
+  const merkletree = tree.generateMerkleTree(holders);
+  const proofs = tree.generateProofs(merkletree, holders);
+
+  console.log(proofs);
+  /*   for (const [key, value] of Object.entries(holders)) {
     console.log("Data sent:", await sendData(key, value));
-  }
+  } */
 }
 
 main();

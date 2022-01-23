@@ -8,10 +8,11 @@
   },
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^1.29.2",
     "dotenv": "^14.2.0",
-    "ethers": "^5.5.3"
+    "ethers": "^5.5.3",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.27"
   }
 }

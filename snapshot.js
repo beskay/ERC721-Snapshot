@@ -1,6 +1,6 @@
-import { ethers } from "ethers";
+const { ethers } = require("ethers");
 
-import "dotenv/config";
+require("dotenv").config();
 const { ALCHEMY_KEY, CONTRACT_ADDRESS, SUPPLY } = process.env;
 
 // contract abi, only function that is needed is ownerOf
@@ -31,9 +31,9 @@ const provider = new ethers.providers.JsonRpcProvider(ALCHEMY_KEY);
 const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
 
 // iterate over all token Ids and store owner. If owner already exists, increase counter
-export default async function getSnapshot() {
+async function getSnapshot() {
   let holders = {};
-  for (let i = 0; i < SUPPLY; i++) {
+  for (let i = 0; i < 10; i++) {
     let tmp = await contract.ownerOf(i);
     if (holders[tmp]) {
       holders[tmp] += 1;
@@ -43,3 +43,5 @@ export default async function getSnapshot() {
   }
   return holders;
 }
+
+module.exports = { getSnapshot };
