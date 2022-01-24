@@ -2,6 +2,12 @@
 
 Simple script for creating a snapshot of all token holders + corresponding balances of an ERC721 contract. Data is being stored using Supabase.
 
+Added functionality of merkle tree whitelisting: Merkletree gets generated out of snapshotted addresses, Merkle root gets displayed in console, Merkle proof for each address is being stored in the database.
+
+Clientside script can pull proof from database when a whitelisted (snapshotted) address wants to mint, if proof is correct smart contract permits mint, if not it reverts.
+
+See also my Merkle tree whitelist repo for more info.
+
 ## Installation
 
 Clone this repo and run
@@ -32,16 +38,19 @@ Supply is the circulating supply of NFTs, e.g. 10000 for BAYC.
 
 You dont have to use Alchemy as your provider obviously, you can also use Infura or your own node etc.
 
-### Supabase
+### Creating database
 
 Create a new project (or use an existing one) and create a new table. Give it a name, make sure the name matches the name supplied in your .env file.
 
-Add two columns:
+Add three columns:
 
 ```
 Column 1: name = address, type = text
 Column 2: name = balance, type = int8
+Column 3: name = proof, type = text
 ```
+
+Column 3 has to be defined as array
 
 ### Creating the snapshot
 
@@ -60,18 +69,6 @@ Data sent: [
 ...
 ```
 
-If you dont want to save the data via Supabase, just run
-
-```
-node snapshot.js
-```
-
-Make sure to edit the script and save the data somewhere else in that case, or just display it in your terminal with
-
-```
-console.log(holders)
-```
-
 ## Useful resources
 
 Supabase docs
@@ -82,3 +79,9 @@ https://docs.ethers.io/v5/
 
 OpenZeppeling ERC721
 https://docs.openzeppelin.com/contracts/4.x/api/token/erc721
+
+Merkle tree js https://github.com/miguelmota/merkletreejs
+
+Openzeppeling MerkleProof https://docs.openzeppelin.com/contracts/4.x/api/utils#MerkleProof
+
+My merkle whitelist repo https://github.com/beskay/MerkleWhitelist
