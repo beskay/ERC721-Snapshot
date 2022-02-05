@@ -1,6 +1,6 @@
 # ERC721 Snapshot
 
-Simple script for creating a snapshot of all token holders + corresponding balances of an ERC721 contract. Data is being stored using Supabase.
+Simple script for creating a snapshot of all token holders + corresponding balances of an ERC721 contract. Data is being stored using Supabase and/or in a local json file.
 
 See also branch "merkle" for added merkle whitelist functionality.
 
@@ -50,7 +50,7 @@ Column 2: name = balance, type = int8
 Run
 
 ```
-node db.js
+node index.js
 ```
 
 And thats literally it. All tokenholders with their corresponding tokenbalance will appear in your Supabase database. You will see the sent data in your terminal, e.g.
@@ -62,17 +62,16 @@ Data sent: [
 ...
 ```
 
-If you dont want to save the data via Supabase, just run
+If you dont want to save the data via Supabase, comment those lines in index.js out
 
 ```
-node snapshot.js
+  // save data in supabase
+  for (const [key, value] of Object.entries(holders)) {
+    console.log("Data sent:", await sendData(key, value));
+  }
 ```
 
-Make sure to edit the script and save the data somewhere else in that case, or just display it in your terminal with
-
-```
-console.log(holders)
-```
+Your snapshot data will be stored in a local json file only.
 
 ## Useful resources
 

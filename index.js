@@ -1,3 +1,4 @@
+import fs from "fs";
 import { createClient } from "@supabase/supabase-js";
 import getSnapshot from "./snapshot.js";
 
@@ -17,9 +18,18 @@ async function sendData(key, value) {
 
 async function main() {
   const holders = await getSnapshot();
+
+  // save data in supabase
   for (const [key, value] of Object.entries(holders)) {
     console.log("Data sent:", await sendData(key, value));
   }
+
+  // or/and in a local json file
+  let json = JSON.stringify(holders);
+  fs.writeFile("holders.json", json, "utf8", function (err) {
+    if (err) throw err;
+    console.log("complete");
+  });
 }
 
 main();
