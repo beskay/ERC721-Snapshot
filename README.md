@@ -2,6 +2,8 @@
 
 Simple script for creating a snapshot of all token holders + corresponding balances of an ERC721 contract. Data is being stored using Supabase.
 
+See also branch "merkle" for added merkle whitelist functionality.
+
 ## Installation
 
 Clone this repo and run
