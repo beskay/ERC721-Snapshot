@@ -32,7 +32,8 @@ async function main() {
       proof: proofs[account],
     };
 
-    console.log(await sendData(account, amount, proofs[account]));
+    //console.log(await sendData(account, amount, proofs[account]));
+    console.log(`${account}, ${amount}, ${proofs[account]}`);
   });
 
   // do something with entries if needed

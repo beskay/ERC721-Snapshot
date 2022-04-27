@@ -57,7 +57,7 @@ Column 3 has to be defined as array
 Run
 
 ```
-node db.js
+node index.js
 ```
 
 And thats literally it. All tokenholders with their corresponding tokenbalance will appear in your Supabase database. You will see the sent data in your terminal, e.g.
